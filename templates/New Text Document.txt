@@ -1,0 +1,65 @@
+
+<!-- 选择表单-->
+<div class="formpos">
+
+    <div class="card">
+        <!-- <div class="card-header bg-dark text-white">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">用户信息调查表</h3>
+                        </div>
+                        <div class="panel-body">
+                            以下信息仅供都江堰城市感知研究所研究使用
+                        </div>
+                    </div>
+                </div> -->
+        <div class="card-body">
+            <form class="form form-horizontal" method="post" role="form">
+                {{ form.csrf_token }}
+                {{ form.boring.label(style='margin-bottom:10px',class_='radio_type') }}<br>
+                &emsp;
+                {% for boring in form.boring %}
+                {{ boring(required='') }}
+                {{ boring.label }}
+                {% endfor %}<br>
+
+                {{ form.beauty.label(style='margin-top:10px;margin-bottom:10px',class_='radio_type') }}<br>
+                {% for beauty in form.beauty %}
+                {{ beauty(required='') }}
+                {{ beauty.label }}
+                &emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.lively.label(style='margin-top:10px;margin-bottom:10px',class_='radio_type') }}<br>
+                &emsp;
+                {% for lively in form.lively %}
+                {{ lively(required='') }}
+                {{ lively.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.depressing.label(style='margin-top:10px;margin-bottom:10px',class_='radio_type') }}<br>
+                &emsp;
+                {% for depressing in form.depressing %}
+                {{ depressing(required='') }}
+                {{ depressing.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.safe.label(style='margin-top:10px;margin-bottom:10px',class_='radio_type') }}<br>
+                &emsp;
+                {% for safe in form.safe %}
+                {{ safe(required='') }}
+                {{ safe.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                <div class="submit-btn">
+                    {{ form.submit(class='button button1 btn-lg btn-primary') }}<br>
+                </div>
+
+            </form>
+        </div>
+        <!-- <div class="card-footer bg-dark text-white">
+            <p>感谢您的配合与参与，祝您生活愉快！</p>
+        </div> -->
+    </div>
+
+</div>

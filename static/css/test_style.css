@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-size: cover;
+
+    background: url(../images/test_background.jpg) no-repeat fixed center 0;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+
+}
+
+img {
+    cursor: pointer;
+    border: solid 5px indianred;
+    border-radius: 30px;
+}
+
+.ss {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100vh;
+    height: 50px;
+    margin: 2rem auto 0;
+    left:200px;
+}
+.formpos{
+    position: relative;
+    display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  
+  }
+  
+  .cards2{
+   font-size: larger;
+  }
+  
+/*图片大小改width*/
+.ss-col-content {
+    width: 60vh;
+    padding-top: 0vh;
+    position: relative;
+    overflow: hidden;
+    height: 80vh;
+}
+
+.ss-col-content-child {
+    /*display: flex;*/
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 80%;
+    transition: -webkit-transform 400ms ease-out;
+    transition: transform 400ms ease-out;
+    transition: transform 400ms ease-out, -webkit-transform 400ms ease-out;
+}
+
+.ss-col-content-child.odd {
+    flex-direction: column;
+}
+
+.ss-img {
+    display: block;
+    position: relative;
+    width: 120%;
+    height: 80vh;
+    -o-object-fit: contain;
+    object-fit: contain;
+    /*justify-content: center;*/
+}
+
+/*按钮设计改这里*/
+/*.ss-controls {*/
+/*    justify-content: center;*/
+/*    position: fixed;*/
+/*    bottom:50vh;*/
+/*    left: 50%;*/
+/*    -webkit-transform: translate(-50%, 50%);*/
+/*    transform: translate(-50%, 50%);*/
+/*    display: flex;*/
+/*    border-radius: 3px;*/
+/*    border: 1px solid #ccc;*/
+/*    overflow: hidden;*/
+/*}*/
+
+
+/*.ss-controls-check {*/
+/*    justify-content: center;*/
+/*    position: absolute;*/
+/*    bottom: -10vh;*/
+/*    left: 50%;*/
+/*    -webkit-transform: translate(-50%, 50%);*/
+/*    transform: translate(-50%, 50%);*/
+/*    display: flex;*/
+/*    border-radius: 3px;*/
+/*    border: 1px solid #ccc;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.ss-controls-btn {*/
+/*  width: 3.5rem;*/
+/*  height: 2.5rem;*/
+/*  line-height: 2.5rem;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  text-transform: uppercase;*/
+/*  font-size: 0.8rem;*/
+/*}*/
+/*.ss-controls-btn:hover, .ss-controls-btn:focus {*/
+/*    outline: none;*/
+/*    colo*/
+/*}*/
+
+/*.submit {*/
+/*    justify-content: center;*/
+/*    margin-top: 90px;*/
+/*    margin-left: 10px;*/
+/*}*/
+
+.modal-content {
+    width: fit-content;
+    padding: 0.2rem 0.4rem;
+}
